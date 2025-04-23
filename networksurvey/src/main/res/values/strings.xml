@@ -1,0 +1,724 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="permissions_rationale_title">Network Survey Permissions</string>
+    <string name="permissions_rationale">The Network Survey app requires a few permissions to work.  Denying these permissions will result in the app not functioning properly.
+        \n\n1. <b>Find Nearby Devices</b>:  This app does not connect to nearby devices.  Instead, it needs this permission to perform a Bluetooth scan for survey.
+        \n\n2. <b>Make and Manage Phone Calls</b>:  This app does not make or manage phone calls.  Instead, it needs this permission to get access to the current cellular connection type (e.g. LTE vs UMTS).
+        \n\n3. <b>Access this Device\'s Location</b>:  The location permission is needed to access Wi-Fi details, Cellular details, GNSS details, and also to write geo-relevant log files.
+        \n\n4. <b>Access Photos, Media, and Files on Your Device</b>:  This permission allows the log file to be written.
+        \n\n5. <b>Notifications</b>:  This permission allows NS to add a notification so you know when a survey is running in the background.</string>
+
+    <string name="cdr_required_permissions_rationale_title">CDR Required Permissions</string>
+    <string name="cdr_required_permissions_rationale">The Network Survey app requires a few permissions for Call Detail Record (CDR) logging to work. Denying these permissions will result CDR logging not working.
+        \n\n1. <b>Make and Manage Phone Calls</b>:  This app does not make or manage phone calls. Instead, it needs this permission to get cellular details to write to the CDR log file.
+        \n\n2. <b>Access this Device\'s Location</b>:  The location permission is needed to access Cellular details that are used to write to the CDR file.
+        \n\n3. <b>Access Photos, Media, and Files on Your Device</b>:  This permission allows the log file to be written.
+        \n\n4. <b>Notifications</b>:  This permission allows NS to add a notification so you know when a survey is running in the background.
+        \n\nThere is a known bug where this permission dialog keep showing, but the permission request dialog does not
+        show up after hitting OK. You can work around this by uninstalling and reinstalling the app and approving all
+        the permissions the first time, or opening the Android settings and manually approving the required permissions.</string>
+
+    <string name="cdr_optional_permissions_rationale_title">CDR Optional Permissions</string>
+    <string name="cdr_optional_permissions_rationale">In addition to the required permissions that were listed in a different dialog, CDR logging has an optional permission.
+        \n\n1. <b>Read Phone Number</b>:  This is needed to get this device\'s phone number for writing it to a CDR log file. You can deny this permission and CDR logging will still work except your phone number won\'t be logged.</string>
+    <string name="request">Request</string>
+    <string name="ignore">Continue Without Permissions</string>
+
+    <string name="upload_help_title">Upload Information</string>
+    <string name="view_manual">View Manual</string>
+    <string name="upload_help">
+        <![CDATA[
+        The upload feature allows you to share collected cellular and Wi-Fi survey data with third-party databases.<br/><br/>
+        <b>How This Feature Works:</b><br/>
+        &#8226; When started, survey records collected by the app are written to an internal database. You can then decide whether to upload the stored records to the selected destinations.<br/>
+        &#8226; When stopped, no survey data is written to the internal database, and no survey data is uploaded to a third-party database.<br/><br/>
+
+        <b>Where Your Data Goes:</b><br/>
+        Your survey data will be uploaded to one or both of the following services, depending on your selections:<br/>
+        &#8226; <a href="https://www.opencellid.org/"><b>OpenCelliD</b></a> - A global open-source cell tower database.<br/>
+        &#8226; <a href="https://api.beacondb.net/"><b>BeaconDB</b></a> - A crowdsourced geolocation database.<br/><br/>
+
+        <b>What Data Is Uploaded:</b><br/>
+        &#8226; <b>Device Location</b> (Latitude, Longitude, Altitude, Accuracy, Speed)<br/>
+        &#8226; <b>Cellular Information</b> (MCC, MNC, TAC/LAC, Cell ID, Signal Strength, Timing Advance, PCI, ARFCN, etc.)<br/>
+        &#8226; <b>Wi-Fi Information</b> (SSID, BSSID, Frequency, Channel, Signal Strength, Encryption Type)<br/>
+        &#8226; <b>Timestamp</b> of Collection<br/><br/>
+
+        <b>When new records are written to the database</b><br/>
+        Cellular and Wi-Fi Survey data is written to the database only if it contains all the required information, AND if the location of the device has changed by at least 35 meters since the last record was written. This is to prevent an excessive amount of survey data from being uploaded to the servers for the same location.<br/><br/>
+
+        Data is anonymized and used to improve cellular and Wi-Fi coverage mapping, as well as enhance the BeaconDB geolocation service.<br/><br/>
+
+        <a href="https://networksurvey.app/manual#data-upload">For more details, visit the Network Survey User Manual.</a>
+        ]]>
+    </string>
+
+    <string name="cdr_help_title">CDR Information</string>
+    <string name="cdr_help">What is a CDR? A CDR is a Call Detail Record that has an event for specific
+        interaction a phone has with the cellular network. For example, a phone call, sms messages, and certain tower
+        changes. The Network Survey app has a CDR File Logging feature that allows for logging CDR events to a CSV file.
+        There are several possible use cases for recording a CDR; for example, one might be to have a record of
+        what your phone is doing, and what towers it is communicating with.
+        \n\nWorthy of note, the regular version of Network Survey does not log SMS events in the CDR, nor does it
+        support logging the "other" phone number associated with a phone call. Logging SMS events requires the
+        full SMS permission, and Google Play won\'t approve publishing Network Survey to the Play Store
+        if it requests the SMS permission. If you are interested in a CDR logger that supports SMS events
+        and logging the "other" phone number for call events, check out the information in the Network Survey User Manual: https://networksurvey.app/manual#cdr</string>
+
+
+    <string name="file_help_title">File Logging &amp; MQTT Streaming: Simplified</string>
+    <string name="file_help">Need help understanding the File Logging and MQTT sections? Here\'s a quick guide:\n\n
+<b>File Logging Control:</b>\n
+This section is all about saving data locally to your phone. When you toggle one of the options to <b>\'On\'</b>,
+the app will start logging that data type to a file in GeoPackage and/or CSV format (depending on the configured
+setting), which you can find on your device. Remember:\n
+\n
+- Toggle <b>Cellular</b>, <b>Wi-Fi</b>, <b>Bluetooth</b>, <b>GNSS</b>, and/or <b>CDR</b> under File Logging Control to save this data locally.\n
+- Logging is completely optional and does not affect MQTT Streaming.\n
+\n
+<b>MQTT Connection:</b>\n
+MQTT streaming lets you send your data in real-time to a remote server. No local storage is needed for this:\n
+\n
+- First, configure the broker connection settings.\n
+- Ensure the switch is on to activate streaming.\n
+- MQTT Streaming works independently of File Logging. You don\'t need to turn on File Logging to stream data.\n
+\n
+Use File Logging for local storage and MQTT Streaming for remote transmission. They both capture the same data,
+but work independently, so you have full control over how you handle your data.</string>
+
+    <string name="bluetooth_permissions_rationale_title">Bluetooth Permissions</string>
+    <string name="bluetooth_permissions_rationale">The Find Nearby Devices permission is needed to perform a Bluetooth scan for survey. If this permission is denied then Bluetooth survey will not work.</string>
+
+    <string name="location_permission_rationale_title">Location Permission</string>
+    <string name="location_permission_rationale">The location permission is needed to access Wi-Fi details, Cellular details, GNSS details,
+        and also to write geo-relevant log files.\n\nDenying the location permission will result in pretty much all of the features of this app not working.</string>
+
+    <string name="background_location_permission_rationale_title">Background Location</string>
+    <string name="background_location_permission_rationale">Network Survey collects location data to enable starting Cellular, Wi-Fi, Bluetooth, and GNSS survey at boot, even when the app is closed or not in use.
+        \n\nWithout the background location permission, this app will not be able to start surveying Cellular, Wi-Fi, or GNSS at boot. If you don\'t want to start surveying when the phone boots then you don\'t
+        need to enable this permission.\n\nEnable the background location permission in the Android settings for this app by selecting <b>Allow all the time</b> on the next page.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="deny_permission">Deny Permission</string>
+
+    <string name="version_suffix" translatable="false" />
+
+    <string name="drawer_menu_description">Menu navigation button</string>
+
+    <string name="turn_on_wifi">Please turn on Wi-Fi</string>
+    <string name="turn_on_bluetooth">Please turn on Bluetooth</string>
+    <string name="grant_bluetooth_scan_permission">The Find Nearby Devices Permission is required for Bluetooth Survey</string>
+    <string name="grant_bluetooth_connect_permission">The Bluetooth Connect permission is not required for BT survey, but it does allow for getting the device name</string>
+    <string name="grant_camera_permission">The Camera Permission is required for scanning QR codes</string>
+
+    <string name="carrier_label">Carrier</string>
+    <string name="data_network_label">Data Network</string>
+    <string name="override_network_label">Override Network</string>
+    <string name="voice_network_label">Voice Network</string>
+
+    <!-- GSM labels -->
+    <string name="arfcn_label">ARFCN</string>
+    <string name="bsic_label">BSIC</string>
+    <string name="rssi_label">RSSI</string>
+    <string name="lac_label">LAC</string>
+
+    <!-- UMTS labels -->
+    <string name="uarfcn_label">UARFCN</string>
+    <string name="psc_label">PSC</string>
+    <string name="rscp_label">RSCP</string>
+    <string name="rnc_label">RNC ID</string>
+    <string name="short_cid_label">Short CID</string>
+
+    <!-- LTE and Common labels -->
+    <string name="mcc_mnc_label">MCC/MNC</string>
+    <string name="mcc_mnc_value">%1$s/%2$s</string>
+    <string name="tac_label">TAC</string>
+    <string name="cid_label">CID</string>
+    <string name="enb_id_label">eNB ID</string>
+    <string name="sector_id_label">Sector ID</string>
+    <string name="earfcn_band_label">EARFCN/Band</string>
+    <string name="earfcn_label">EARFCN/Band</string>
+    <string name="pci_label">PCI</string>
+    <string name="bandwidth_label">Bandwidth</string>
+    <string name="ta_label">TA</string>
+    <string name="cqi_label">CQI</string>
+    <string name="rsrp_label">RSRP</string>
+    <string name="rsrq_label">RSRQ</string>
+    <string name="snr_label">SNR</string>
+    <string name="dbm_value_label">%1$s dBm</string>
+    <string name="db_value_label">%1$s dB</string>
+
+    <!-- NR labels -->
+    <string name="narfcn_band_label">NARFCN/Band</string>
+    <string name="narfcn_label">NARFCN</string>
+    <string name="ss_rsrp_label">SS-RSRP</string>
+    <string name="ss_rsrq_label">SS-RSRQ</string>
+    <string name="ss_sinr_label">SS-SINR</string>
+
+    <!-- Dashboard Constants -->
+    <string name="card_title_upload">Upload to Database</string>
+    <string name="start_scanning">Start Scanning</string>
+    <string name="stop_scanning">Stop Scanning</string>
+    <string name="scanning_inactive">Scanning Inactive</string>
+    <string name="scanning_active">Scanning Active</string>
+    <string name="upload_scanning_description_text">Start scanning to collect cellular and Wi-Fi survey data for upload to 3rd party DBs. This operates independently of file logging and MQTT streaming, allowing you to start and stop data collection specifically for upload. Click the question mark icon for more details.</string>
+    <string name="upload_queue_title">Records Ready for Upload</string>
+    <string name="cellular_upload_queue_count_initial">Cellular:</string>
+    <string name="cellular_upload_queue_count">Cellular:  %1$d</string>
+    <string name="wifi_upload_queue_count_initial">Wi-Fi:</string>
+    <string name="wifi_upload_queue_count">Wi-Fi:  %1$d</string>
+    <string name="upload_button_text">Upload\nRecords</string>
+    <string name="upload_survey_records">Upload Survey Records</string>
+    <string name="upload_progress">Upload Progress</string>
+    <string name="upload_percentage_initial" translatable="false">0%</string>
+    <string name="upload_percentage" translatable="false">%1$d%%</string>
+    <string name="upload_result">Upload Result</string>
+    <string name="opencellid_upload" translatable="false">OpenCelliD:</string>
+    <string name="beacondb_upload" translatable="false">BeaconDB:</string>
+    <string name="upload_pending">Upload Pending…</string>
+    <string name="uploader_canceled">Upload canceled</string>
+    <string name="upload_to_opencellid">Upload to OpenCelliD</string>
+    <string name="anonymously">Anonymously</string>
+    <string name="upload_dialog_message">Uploading your survey records will share location data with third-party services. Contributing to these crowdsourced databases helps improve coverage maps and geolocation accuracy. Your participation is entirely voluntary—the choice to share your data is yours and yours alone.</string>
+    <string name="access_token_warning">You have to enter a valid access token in preferences</string>
+    <string name="upload_to_beacondb">Upload to BeaconDB</string>
+    <string name="retry_on_failure">Retry on failure</string>
+    <string name="dont_show_again">Don\'t show this again</string>
+
+    <string name="card_title_logging_details">Local File Logging Control</string>
+    <string name="card_title_mqtt_details">MQTT Connection</string>
+    <string name="cellular_title">Cellular</string>
+    <string name="wifi_title">Wi-Fi</string>
+    <string name="bluetooth_title">Bluetooth</string>
+    <string name="gnss_title">GNSS</string>
+    <string name="cdr_title">CDR</string>
+    <string name="status_label">Status:</string>
+    <string name="off">Off</string>
+    <string name="wifi_icon_description">Wi-Fi Icon</string>
+    <string name="bluetooth_icon_description">Bluetooth Icon</string>
+    <string name="gnss_icon_description">GNSS Icon</string>
+    <string name="cdr_icon_description">CDR Icon</string>
+    <string name="logging_status_enabled">On</string>
+    <string name="status_disabled">Off</string>
+    <string name="mqtt_off">MQTT Connection Off</string>
+    <string name="mqtt_connecting">Attempting to Connect</string>
+    <string name="mqtt_connected">Connected to MQTT Broker</string>
+    <string name="status_on">On</string>
+    <string name="cellular_label">Cellular:</string>
+    <string name="wifi_label">Wi-Fi:</string>
+    <string name="bluetooth_label">Bluetooth:</string>
+    <string name="gnss_label">GNSS:</string>
+    <string name="device_status_label">Device Status:</string>
+    <string name="what_is_configured_to_stream">What is configured to stream?</string>
+
+    <string name="card_title_location">My Location</string>
+    <string name="my_location_icon_description">My Location Icon</string>
+    <string name="card_title_cellular_details_initial">Serving Cell Details</string>
+    <string name="card_title_cellular_details">%1$s Serving Cell Details</string>
+    <string name="cellular_icon_description">Cellular Tower Icon</string>
+    <string name="upload_help_description">Upload Help Icon</string>
+    <string name="file_help_description">File Help Icon</string>
+    <string name="card_title_neighbors">Neighbors</string>
+    <string name="card_title_neighbors_gsm">GSM Neighbors</string>
+    <string name="card_title_neighbors_umts">UMTS Neighbors</string>
+    <string name="card_title_neighbors_lte">LTE Neighbors</string>
+    <string name="card_title_neighbors_nr">NR Neighbors</string>
+
+    <string name="cellular_info_description">Cellular Information Icon</string>
+    <string name="gsm_info_description">GSM Terms Info</string>
+    <string name="gsm_cellular_terms_explanation">
+        <b>MCC</b> (Mobile Country Code): Unique country identifier for mobile networks.\n\n
+        <b>MNC</b> (Mobile Network Code): Unique network identifier within the country. Together the MCC and MNC represent a specific service provider (e.g. T-Mobile).\n\n
+        <b>LAC</b> (Location Area Code): Identifier for a group of cell towers that is used for paging.\n\n
+        <b>CID</b> (Cell Identity): Identifier for a specific cell tower. Together the MCC, MNC, LAC and CID uniquely identifies a specific GSM cell panel from all others in the world.\n\n
+        <b>ARFCN</b> (Absolute Radio Frequency Channel Number): Number representing the GSM carrier frequency.\n\n
+        <b>BSIC</b> (Base Station Identity Code): A physical layer cell identifier that helps a mobile device differentiate two cells during cell selection/reselection that are using the same frequency.\n\n
+        <b>RSSI</b> (Received Signal Strength Indicator): Received power of the downlink signal in dBm as received by the mobile device.\n\n
+    </string>
+    <string name="umts_info_description">UMTS Terms Info</string>
+    <string name="umts_cellular_terms_explanation">
+        <b>MCC</b> (Mobile Country Code): Unique country identifier for mobile networks.\n\n
+        <b>MNC</b> (Mobile Network Code): Unique network identifier within the country. Together the MCC and MNC represent a specific service provider (e.g. T-Mobile).\n\n
+        <b>LAC</b> (Location Area Code): Identifier for a group of cell towers that is used for paging.\n\n
+        <b>CID</b> (Cell Identity): Identifier for a specific cell tower. Together the MCC, MNC, LAC, and CID uniquely identifies a specific UMTS cell panel from all others in the world.\n\n
+        <b>UARFCN</b> (UTRA Absolute Radio Frequency Channel Number): Number representing UMTS carrier frequency.\n\n
+        <b>PSC</b> (Primary Scrambling Code): A physical layer cell identifier that helps a mobile device differentiate two cells that are using the same frequency.\n\n
+        <b>RSSI</b> (Received Signal Strength Indicator): Received power of the downlink signal in dBm as received by the mobile device.\n\n
+        <b>RSCP</b> (Reference Signal Code Power): Power of the reference signal in dBm as received by the mobile device.\n\n
+    </string>
+    <string name="lte_info_description">LTE Terms Info</string>
+    <string name="lte_cellular_terms_explanation">
+        <b>MCC</b> (Mobile Country Code): Unique country identifier for mobile networks.\n\n
+        <b>MNC</b> (Mobile Network Code): Unique network identifier within the country. Together the MCC and MNC represent a specific service provider (e.g. T-Mobile).\n\n
+        <b>TAC</b> (Tracking Area Code): Identifier for a group of cell towers that is used for paging.\n\n
+        <b>CID</b> (Cell Identity): Identifier for a specific cell tower. Together the MCC, MNC, and CID uniquely identifies a specific LTE cell panel from all others in the world.\n\n
+        <b>eNB ID</b> (eNodeB Identifier): The cell tower identifier, which will contain one or more cell panels. This is the first 20 bits of the CID.\n\n
+        <b>Sector ID</b>: Identifies a sector (aka panel) within a cell tower. This is the last 8 bits of the CID.\n\n
+        <b>EARFCN</b> (E-UTRA Absolute Radio Frequency Channel Number): Number representing LTE carrier frequency.\n\n
+        <b>Band</b>: That band number representing the frequency range the EARFCN falls in.\n\n
+        <b>PCI</b> (Physical Cell ID): A physical layer cell identifier that helps a mobile device differentiate two cells during cell selection/reselection that are using the same frequency. Valid range 0-503. The numbers in parenthesis represent the Primary Sync Sequence (PSS) and Secondary Sync Sequence (SSS).\n\n
+        <b>Bandwidth</b>: Width of the signal.\n\n
+        <b>TA</b> (Timing Advance): The timing offset a mobile device uses to keep its transmissions in sync with the tower. Represents RF distance from the tower, which can be loosely translated to physical distance. Larger numbers indicate the device is further away from the tower.\n\n
+        <b>CQI</b> (Channel Quality Indicator): Used by the UE to notify the serving cell (eNodeB) about the quality of the downlink channel. Valid range 0-15 with 15 being the best.\n\n
+        <b>RSRP</b> (Reference Signal Received Power): Power of the reference signal in dBm as received by the mobile device. Valid range -44 to -140.\n\n
+        <b>RSRQ</b> (Reference Signal Received Quality): Measures the quality of the received reference signal. Valid range -3 to -19.5 with -3 being the best.\n\n
+        <b>SNR</b> (Signal to Noise Ratio): The Reference Signal Signal-to-Noise Ratio measured in dB. Full Range: -20 dB to +30 dB, with 30 being the best. Common range is 5 to 15 ish.\n
+    </string>
+    <string name="nr_info_description">NR Terms Info</string>
+    <string name="nr_cellular_terms_explanation">
+        <b>MCC</b> (Mobile Country Code): Unique country identifier for mobile networks.\n\n
+        <b>MNC</b> (Mobile Network Code): Unique network identifier within the country. Together the MCC and MNC represent a specific service provider (e.g. T-Mobile).\n\n
+        <b>TAC</b> (Tracking Area Code): Identifier for a group of cell towers that is used for paging.\n\n
+        <b>CID</b> (Cell Identity): Identifier for a specific cell tower. Together the MCC, MNC, and CID uniquely identifies a specific NR cell panel from all others in the world.\n\n
+        <b>NARFCN</b> (New radio Absolute Radio Frequency Channel Number): Number representing NR carrier frequency.\n\n
+        <b>PCI</b> (Physical Cell ID): A physical layer cell identifier that helps a mobile device differentiate two cells during cell selection/reselection that are using the same frequency. Valid range 0-1007. The numbers in parenthesis represent the Primary Sync Sequence (PSS) and Secondary Sync Sequence (SSS).\n\n
+        <b>TA</b> (Timing Advance): The timing offset a mobile device uses to keep its transmissions in sync with the tower. Represents RF distance from the tower, which can be loosely translated to physical distance. Larger numbers indicate the device is further away from the tower.\n\n
+        <b>SS_RSRP</b> (Secondary Synchronization Reference Signal Received Power): Power of the reference signal in dBm as received by the mobile device. Valid range -31 to -156.\n\n
+        <b>SS_RSRQ</b> (Secondary Synchronization Reference Signal Received Quality): Measures the quality of the received reference signal. Valid range 20 to -43 with 20 being the best.\n
+    </string>
+
+    <string name="override_network_info_title">What is an Override Network?</string>
+    <string name="override_network_explanation">The override network type is for market branding or visualization purposes only. It cannot be treated as the actual network type the device is camped on.\n\nIn other words, service providers want the user to think they are on a better network than they actually are such as showing 5G in the top bar when it is really a 4G network.</string>
+
+    <string name="missing_location_permission">Missing Location Permission</string>
+    <string name="no_gps_device">No GPS detected in device!</string>
+    <string name="turn_on_gps">Please turn on GPS</string>
+    <string name="searching_for_location">Searching for GPS …</string>
+    <string name="low_gps_confidence">Low GPS Confidence</string>
+    <string name="altitude_initial">Alt: </string>
+    <string name="altitude_value">Alt: %1$s meters</string>
+    <string name="accuracy_initial">Accuracy: </string>
+    <string name="accuracy_value">Accuracy: %1$s meters</string>
+
+    <string name="cellular_logging_start_toast">Started Writing the Cellular Log File</string>
+    <string name="cellular_logging_stop_toast">Cellular Log File Closed</string>
+    <string name="cellular_logging_toggle_failed">Failed to toggle the cellular logging state</string>
+    <string name="wifi_logging_start_toast">Started Writing the Wi-Fi Log File</string>
+    <string name="wifi_logging_stop_toast">Wi-Fi Log File Closed</string>
+    <string name="wifi_logging_toggle_failed">Failed to toggle the Wi-Fi logging state</string>
+    <string name="bluetooth_logging_start_toast">Started Writing the Bluetooth Log File</string>
+    <string name="bluetooth_logging_stop_toast">Bluetooth Log File Closed</string>
+    <string name="bluetooth_logging_toggle_failed">Failed to toggle the Bluetooth logging state</string>
+    <string name="gnss_logging_start_toast">Started Writing the GNSS Log File</string>
+    <string name="gnss_logging_stop_toast">GNSS Log File Closed</string>
+    <string name="cdr_logging_start_toast">Started Writing the CDR Log File</string>
+    <string name="cdr_logging_stop_toast">CDR Log File Closed</string>
+    <string name="gnss_logging_toggle_failed">Failed to toggle the GNSS logging state; is GPS turned on?</string>
+    <string name="cdr_logging_toggle_failed">Failed to toggle the CDR logging state</string>
+
+    <string name="grpc_connection_title">Server Connection</string>
+    <string name="grpc_connection_description">Here you can connect to a Network Survey server.  Once connected, all future survey results will be streamed to the server.
+        \n\nSteps for Connecting:
+        \n\n1. Enter in the following information:
+        \n     a. The Server IP Address or Hostname
+        \n     b. The Server Port Number (Default: 2621)
+        \n     c. A name that is used to identify this device on the server
+        \n\n2. Click the connect toggle switch</string>
+    <string name="server_host_hint">Server Address</string>
+    <string name="server_port_hint">Port Number</string>
+    <string name="device_name_hint">Device Name</string>
+
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_connecting">Connecting …</string>
+    <string name="status_connected">Connected</string>
+    <string name="status_disconnecting">Disconnecting …</string>
+
+    <string name="cellular_calculators">Cellular Calculators</string>
+    <string name="settings">Settings</string>
+    <string name="manual">User Manual</string>
+    <string name="messaging_docs">Messaging Docs</string>
+    <string name="report_issue">Report an Issue</string>
+    <string name="github" translatable="false">GitHub</string>
+
+    <string name="network_survey_service_description">The Network Survey Service runs when the app needs to do work in the background such as write to the log file or stream data out over active connection</string>
+    <string name="connection_service_description">The Connection Service handles managing the connection to a remote server to stream Network Survey data</string>
+
+    <string name="notification_channel_name">Network Survey</string>
+    <string name="logging_notification_text">Writing to the log file(s)</string>
+    <string name="and">" and "</string>
+    <string name="mqtt_connection_notification_text">Streaming records to an MQTT Broker</string>
+    <string name="mqtt_reconnecting_notification_text">Reconnecting to MQTT Broker</string>
+    <string name="network_survey_notification_title">Network Survey Active</string>
+    <string name="connection_notification_title">Network Survey Server Connection</string>
+    <string name="connection_notification_active_text">The Connection is Active</string>
+    <string name="connection_notification_connecting_text">Attempting to Connect</string>
+
+    <!-- Common for Wi-Fi and Bluetooth Lists -->
+    <string name="scan_number">Scan #: %1$d</string>
+    <string name="scan_status_scanning">Scanning …</string>
+    <string name="scan_status_paused">UI Paused</string>
+    <string name="scan_status_permission">Missing Permission</string>
+
+    <!-- Wi-Fi Network List -->
+    <string name="wifi_aps_in_scan">APs In Scan: %1$d</string>
+    <string name="wifi_scan_status_disabled">Wi-Fi Disabled</string>
+
+    <string name="dbm_value">%1$s dBm</string>
+    <string name="bssid_value">BSSID: %1$s</string>
+    <string name="wifi_frequency_value">%1$d MHz</string>
+    <string name="wifi_channel_value">CH %1$d</string>
+    <string name="wifi_channel_and_center_value">CH %1$d(%2$d)</string>
+    <string name="wifi_bandwidth_value">BW %1$s</string>
+
+    <string name="content_description_sort_wifi_networks_button">Sort Wi-Fi Networks Button</string>
+    <string name="content_description_pause_wifi_network_scan_ui_updates">Pause Wi-Fi network scan UI updates</string>
+
+    <string name="android_9_throttling_information">Android 9 throttles Wi-Fi scans to 2 per minute. Upgrade Android if possible.</string>
+    <string name="android_10_throttling_information">Android 10+ throttles Wi-Fi scans. To disable throttling: System -> Advanced -> Developer options -> WiFi scan throttling to off.</string>
+    <string name="enable_developer_options">To enable Developer Options: Settings -> About Phone -> Tap Build Number 7 times.</string>
+
+    <!-- Bluetooth Device List -->
+    <string name="bluetooth_devices_in_scan"># of Devices: %1$d</string>
+    <string name="bluetooth_scan_status_not_supported">Not Supported</string>
+    <string name="bluetooth_scan_status_disabled">Bluetooth Disabled</string>
+
+    <string name="content_description_sort_bluetooth_button">Sort Bluetooth Devices Button</string>
+    <string name="content_description_pause_bluetooth_scan_ui_updates">Pause Bluetooth scan UI updates</string>
+
+    <string name="device_name">Device Name:</string>
+
+    <!-- MQTT Connection UI constants -->
+    <string name="mqtt_connection_title_full">MQTT Broker Connection</string>
+    <string name="stream_cellular_title">Stream Cellular</string>
+    <string name="stream_phone_state_title">Stream Cellular Phone State</string>
+    <string name="stream_wifi_title">Stream Wi-Fi</string>
+    <string name="stream_bluetooth_title">Stream Bluetooth</string>
+    <string name="stream_gnss_title">Stream GNSS</string>
+    <string name="stream_device_status_title">Stream Device Status</string>
+    <string name="mqtt_topic_prefix_title">MQTT Topic Prefix</string>
+
+    <string name="help_title">Help?</string>
+
+    <!-- App Restriction Constants -->
+    <string name="mqtt_start_on_boot_title">MQTT Start at Boot</string>
+    <string name="mqtt_start_on_boot_description">If true, when the phone boots an attempt will be made to connect to the MDM configured MQTT broker</string>
+    <string name="mqtt_connection_host_title">MQTT Connection Host</string>
+    <string name="mqtt_connection_host_description">The MQTT broker hostname (e.g. mqtt.example.com)</string>
+    <string name="mqtt_connection_port_title">MQTT Connection Port</string>
+    <string name="mqtt_connection_port_description">The port number to use when connecting to the MQTT broker (e.g. 8883)</string>
+    <string name="mqtt_tls_enabled_title">MQTT TLS Enabled</string>
+    <string name="mqtt_tls_enabled_description">True to use SSL/TLS for the MQTT connection, false to use a plaintext connection</string>
+    <string name="mqtt_client_id_title">MQTT Client ID</string>
+    <string name="mqtt_client_id_description">The name this device should use to represent itself to the MQTT broker</string>
+    <string name="mqtt_username_title">MQTT Broker Username</string>
+    <string name="mqtt_username_description">The username to use when authenticating to the MQTT broker</string>
+    <string name="mqtt_password_title">MQTT Broker Password</string>
+    <string name="mqtt_password_description">The password to use when authenticating to the MQTT broker</string>
+    <string name="mqtt_topic_prefix_description">The prefix to use on the standard MQTT topics used by Network Survey. For example, setting the value to "my/custom/topic/" will result in LTE messages being set on "my/custom/topic/lte_message". The default value is empty.</string>
+    <string name="cellular_stream_title">Cellular Stream Enabled</string>
+    <string name="cellular_stream_description">True to stream cellular data, false otherwise</string>
+    <string name="wifi_stream_title">Wi-Fi Stream Enabled</string>
+    <string name="wifi_stream_description">True to stream Wi-Fi data, false otherwise</string>
+    <string name="bluetooth_stream_title">Bluetooth Stream Enabled</string>
+    <string name="bluetooth_stream_description">True to stream Bluetooth data, false otherwise</string>
+    <string name="gnss_stream_title">GNSS Stream Enabled</string>
+    <string name="gnss_stream_description">True to stream GNSS data, false otherwise</string>
+    <string name="device_status_stream_title">Device Status Stream Enabled</string>
+    <string name="device_status_stream_description">True to stream Device Status messages over MQTT, false otherwise</string>
+    <string name="auto_start_cellular_logging_description">True to start cellular logging automatically, false otherwise</string>
+    <string name="auto_start_wifi_logging_description">True to start Wi-Fi logging automatically, false otherwise</string>
+    <string name="auto_start_bluetooth_logging_description">True to start Bluetooth logging automatically, false otherwise</string>
+    <string name="auto_start_gnss_logging_description">True to start GNSS logging automatically, false otherwise</string>
+    <string name="auto_start_cdr_logging_description">True to start CDR logging automatically, false otherwise</string>
+    <string name="ignore_wifi_scan_throttling_warning_title">Ignore Wi-Fi Throttling Warning</string>
+    <string name="ignore_wifi_scan_throttling_warning_description">True to ignore showing the throttling warning snackbar message on the Wi-Fi UI, false to allow the snackbar message to work as normal. The snackbar message tells the user if Wi-Fi throttling is enabled, and gives them a link to turn off throttling in developer options. If developer options are disabled via MDM, then set this to true so the user is not asked to open developer options.</string>
+
+    <!-- User Preference Constants -->
+    <string name="mdm_override_title">MDM Override</string>
+    <string name="mdm_override_summary_on">Network Survey is controlled via MDM, but now some of the MDM settings can be overridden</string>
+    <string name="mdm_override_summary_off">Network Survey is controlled via MDM</string>
+
+    <string name="logging_config_title">Logging Config</string>
+
+    <string name="log_rollover_description">The maximum file size (in MB) before starting a new survey log file. The default value is 5 MB.</string>
+    <string name="log_rollover_title">Log Rollover Size (MB)</string>
+
+    <string name="log_file_description">Specifies what type of file to log the survey results to. The options are 0, 1, or 2. 0 is for CSV, 1 is for GeoPackage, and 2 is for both CSV and GeoPackage.</string>
+    <string name="log_file_title">Log File Type</string>
+
+    <string name="auto_start_cellular_logging_title">Auto Start Cellular Logging</string>
+    <string name="auto_start_cellular_logging_summary_on">Cellular logging will be started upon app opening or when the phone is turned on</string>
+    <string name="auto_start_cellular_logging_summary_off">Cellular logging will only start when manually enabled</string>
+
+    <string name="auto_start_wifi_logging_title">Auto Start Wi-Fi Logging</string>
+    <string name="auto_start_wifi_logging_summary_on">Wi-Fi logging will be started upon app opening or when the phone is turned on</string>
+    <string name="auto_start_wifi_logging_summary_off">Wi-Fi logging will only start when manually enabled</string>
+
+    <string name="auto_start_bluetooth_logging_title">Auto Start Bluetooth Logging</string>
+    <string name="auto_start_bluetooth_logging_summary_on">Bluetooth logging will be started upon app opening or when the phone is turned on</string>
+    <string name="auto_start_bluetooth_logging_summary_off">Bluetooth logging will only start when manually enabled</string>
+
+    <string name="auto_start_gnss_logging_title">Auto Start GNSS Logging</string>
+    <string name="auto_start_gnss_logging_summary_on">GNSS logging will be started upon app opening or when the phone is turned on</string>
+    <string name="auto_start_gnss_logging_summary_off">GNSS logging will only start when manually enabled</string>
+
+    <string name="auto_start_cdr_logging_title">Auto Start CDR Logging</string>
+    <string name="auto_start_cdr_logging_summary_on">CDR logging will be started upon app opening or when the phone is turned on</string>
+    <string name="auto_start_cdr_logging_summary_off">CDR logging will only start when manually enabled</string>
+
+    <string name="scan_interval_config_title">Scanning Rate</string>
+
+    <string name="cellular_scan_interval_title">Cellular Scan Interval</string>
+    <string name="cellular_scan_interval_description">The rate at which Cellular towers will be scanned for in seconds. Smaller values will decrease battery life.</string>
+
+    <string name="wifi_scan_interval_title">Wi-Fi Scan Interval</string>
+    <string name="wifi_scan_interval_description">The rate at which Wi-Fi networks will be scanned for in seconds. Smaller values will decrease battery life.</string>
+
+    <string name="bluetooth_scan_interval_title">Bluetooth Scan Interval</string>
+    <string name="bluetooth_scan_interval_description">The rate at which Bluetooth devices will be scanned for in seconds. Smaller values will decrease battery life.</string>
+
+    <string name="gnss_scan_interval_title">GNSS Scan Interval</string>
+    <string name="gnss_scan_interval_description">The rate at which GNSS satellites will be scanned for in seconds. Smaller values will decrease battery life.</string>
+
+    <string name="device_status_scan_interval_title">Device Status Message Interval</string>
+    <string name="device_status_scan_interval_description">The rate at which Device Status messages will be generated in seconds.</string>
+
+    <string name="mqtt_connection_config_title">MQTT Connection Config</string>
+
+    <string name="location_config_title">Location Config</string>
+    <string name="location_provider_title">Location Provider</string>
+    <string name="location_provider_description">Specifies what provider to use for getting the device\'s location. The devices location is added to log files and MQTT messages.\n\n
+        <b>FUSED</b>: Combines inputs from GNSS and NETWORK location providers to provide the most battery efficient location fix, but can be less accurate.\n\n
+        <b>GNSS</b>: Determines location using GNSS satellites (e.g. GPS). This uses more battery than NETWORK based, but is typically more accurate.\n\n
+        <b>NETWORK</b>: Determines location based on nearby cell towers and Wi-Fi access points.\n\n
+        <b>ALL</b>: Uses all the location providers and adds each location to the device status message, which results in multiple locations written in the device status message. Useful if you want to compare the locations for analysis purpose; or the best possible location fix.\n\n
+    </string>
+    <string name="location_provider_mdm_description">Specifies what provider to use for getting the device\'s location. The options are 0, 1, 2, or 3. 0 is for FUSED, 1 is for GNSS, 2 is for NETWORK, and 3 is for ALL.</string>
+
+    <string name="security_config_title">Security Config</string>
+    <string name="allow_intent_control_title">Allow other apps to Start NS</string>
+    <string name="allow_intent_control_description">True to allow other apps to start Network Survey via an Intent</string>
+    <string name="allow_intent_control_summary_on">Other apps can start Network Survey</string>
+    <string name="allow_intent_control_summary_off">Other apps will be blocked from starting Network Survey</string>
+
+    <string name="tower_map_config_title">Tower Map Config</string>
+    <string name="display_coverage_area_title">Display Serving Cell Coverage</string>
+    <string name="display_coverage_area_summary_on">Serving cell coverage will be displayed on the map</string>
+    <string name="display_coverage_area_summary_off">Serving cell coverage won\'t be displayed on the map</string>
+
+    <string name="allow_data_upload">External Data Upload</string>
+    <string name="allow_data_upload_mdm_description">True to allow users to upload survey records to 3rd Party databases such as OpenCelliD and BeaconDB, false to prevent it</string>
+
+    <string name="auto_start_mqtt_summary_on">The MQTT connection will be started when the phone is booted (Note that a valid MQTT broker must be configured in the connection UI)</string>
+    <string name="auto_start_mqtt_summary_off">The MQTT connection will only be started manually</string>
+
+    <string name="pref_file_location_output_title">Location</string>
+    <string name="pref_file_location_output_summary">Logs location fix details to a file</string>
+    <string name="auto_share_preference_key">auto_share_file</string>
+
+    <string name="preferences_coordinate_format_dd">Decimal Degrees</string>
+    <string name="preferences_coordinate_format_dms">Degrees, Minutes, Decimal Seconds</string>
+    <string name="preferences_coordinate_format_ddm">Degrees, Decimal Minutes</string>
+
+    <string name="preferences_preferred_distance_units_title">Preferred distance units</string>
+    <string name="preferences_preferred_distance_units_option_meters">Meters</string>
+    <string name="preferences_preferred_distance_units_option_feet">Feet</string>
+
+    <string name="preferences_preferred_speed_units_title">Preferred speed units</string>
+    <string name="preferences_preferred_speed_units_option_meters_per_second">Meters per second</string>
+    <string name="preferences_preferred_speed_units_option_kilometers_per_hour">Kilometers per hour</string>
+    <string name="preferences_preferred_speed_units_option_miles_per_hour">Miles per hour</string>
+
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy_preference_summary">Click here to view the privacy policy</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+
+    <!-- General GNSS Constants -->
+    <string name="enable_gps_message">Location (GPS/GNSS) is disabled. It is required for tying cellular survey records to a location and to also get GNSS details.
+        \n\nDo you want to enable it now?</string>
+    <string name="enable_gps_positive_button">Enable GPS/GNSS</string>
+    <string name="enable_gps_negative_button">No</string>
+
+    <!-- GNSS Failure Alert -->
+    <string name="app_icon_description">App Icon</string>
+    <string name="not_supported_title">GNSS Features May Not Work</string>
+    <string name="not_supported_description">Network Survey is not receiving raw GNSS measurements from the phone, which are required for generating the GNSS GeoPackage/CSV files, or streaming GNSS records over MQTT. For more information and a list of devices that support raw GNSS, consult Android\'s <a href="https://developer.android.com/guide/topics/sensors/gnss">Raw GNSS Measurements</a> guide.</string>
+    <string name="remember_my_decision">Don\'t ask me again</string>
+
+    <!-- GNSS Status View -->
+    <string name="gps_latitude_label">Lat:</string>
+    <string name="gps_longitude_label">Long:</string>
+    <string name="gps_fix_time_label">Time:</string>
+    <string name="gps_ttff_label">TTFF:</string>
+    <string name="gps_altitude_label">Alt:</string>
+    <string name="gps_altitude_msl_label">Alt (MSL):</string>
+    <string name="gps_accuracy_label">E Acc:</string>
+    <string name="gps_hor_and_vert_accuracy_label">E H/V Acc:</string>
+    <string name="gps_speed_label">Speed:</string>
+    <string name="gps_speed_acc_label">S. Acc:</string>
+    <string name="gps_bearing_label">Bearing:</string>
+    <string name="gps_bearing_acc_label">B. Acc:</string>
+    <string name="gps_num_sats_label"># Sats:</string>
+    <string name="pdop_label">PDOP:</string>
+    <string name="hvdop_label">H/V DOP:</string>
+    <string name="gnss_not_available">Global Navigation Satellite System (GNSS) satellites not available</string>
+    <string name="sbas_not_available">Satellite-based Augmentation System (SBAS) satellites not available</string>
+    <string name="filter_signal_text">Showing %1$d of %2$d signals</string>
+    <string name="filter_showall">(show all)</string>
+    <string name="gps_error_time_title">Your GNSS time is wrong</string>
+    <string name="gps_error_time_message">The device GNSS time of:\n\n%1$s\n\n…is more than %2$d days different from your system clock. This can be caused by the GPS week rollover issue - ask your device manufacturer for details. See https://bit.ly/gps-week-rollover for more info.</string>
+    <string name="notification_title">%1$d/%2$d sats | %3$d/%4$d signals</string>
+
+    <string name="gps_content_description">GPS</string>
+    <string name="glonass_content_description">GLONASS</string>
+    <string name="galileo_content_description">Galileo</string>
+    <string name="qzss_content_description">QZSS</string>
+    <string name="beidou_content_description">BeiDou</string>
+    <string name="irnss_content_description">IRNSS</string>
+
+    <string name="waas_content_description">WAAS</string>
+    <string name="egnos_content_description">EGNOS</string>
+    <string name="gagan_content_description">GAGAN</string>
+    <string name="msas_content_description">MSAS</string>
+    <string name="sdcm_content_description">SDCM</string>
+    <string name="snas_content_description">SNAS</string>
+    <string name="saccsa_content_description">SACCSA</string>
+    <string name="southpan_content_description">SouthPAN</string>
+
+    <string name="id_column_label">ID</string>
+    <string name="gps_cn0_column_label">C/N0</string>
+    <string name="avg_cn0_label">Avg</string>
+    <string name="menu_option_sort_by">Sort by</string>
+    <string name="menu_option_filter_content_description">Filter signals</string>
+    <string name="gnss_flag_image_label">GNSS</string>
+    <string name="sbas_flag_image_label">SBAS</string>
+    <string name="cf_column_label">CF</string>
+    <string name="gps_elevation_column_label">Elev</string>
+    <string name="gps_azimuth_column_label">Azim</string>
+    <string name="flags_aeu_column_label">Flags</string>
+    <string name="copied_to_clipboard">Location copied to clipboard</string>
+
+    <string name="filter_dialog_title">Show only these GNSS</string>
+    <string name="save">"Save"</string>
+    <string name="sbas">SBAS</string>
+
+    <!-- GNSS Sky View -->
+    <string name="sky_legend_title">Legend</string>
+    <string name="sky_legend_shape_gnss_title">Global Navigation Satellite Systems (GNSS)</string>
+    <string name="sky_legend_shape_navstar">NAVSTAR GPS (USA)</string>
+    <string name="sky_legend_shape_glonass">GLONASS (Russia)</string>
+    <string name="sky_legend_shape_galileo">Galileo (European Union)</string>
+    <string name="sky_legend_shape_qzss">QZSS (Japan)</string>
+    <string name="sky_legend_shape_beidou">BeiDou/COMPASS (China)</string>
+    <string name="sky_legend_shape_irnss">IRNSS (India)</string>
+
+    <string name="sky_legend_shape_sbas_title">Satellite-based Augmentation Systems (SBAS)</string>
+    <string name="sky_legend_shape_waas">WAAS (USA)</string>
+    <string name="sky_legend_shape_egnos">EGNOS (European Union)</string>
+    <string name="sky_legend_shape_gagan">GAGAN (India)</string>
+    <string name="sky_legend_shape_msas">MSAS (Japan)</string>
+    <string name="sky_legend_shape_sdcm">SDCM (Russia)</string>
+    <string name="sky_legend_shape_snas">SNAS (China)</string>
+    <string name="sky_legend_shape_saccsa">SACCSA (ICAO)</string>
+    <string name="sky_legend_shape_southpan">SouthPAN (Australia / New Zealand)</string>
+
+    <string name="sky_legend_shape_availability_title">Signal Availability</string>
+    <string name="sky_legend_shape_not_in_view">Not in view of device</string>
+    <string name="sky_legend_shape_in_view">In view</string>
+    <string name="sky_legend_shape_used_in_fix">Used in fix</string>
+
+    <!-- Content descriptions -->
+    <string name="lock">lock</string>
+    <string name="usa_flag">USA flag</string>
+    <string name="russia_flag">Russia flag</string>
+    <string name="eu_flag">EU flag</string>
+    <string name="china_flag">China flag</string>
+    <string name="japan_flag">Japan flag</string>
+    <string name="india_flag">India flag</string>
+    <string name="icao_flag">ICAO flag</string>
+    <string name="southpan_flag">SouthPAN flag</string>
+
+    <string name="circle">circle</string>
+    <string name="square">square</string>
+    <string name="triangle">triangle</string>
+    <string name="pentagon">pentagon</string>
+    <string name="hexagon">hexagon</string>
+    <string name="oval">oval</string>
+    <string name="diamond">diamond</string>
+    <string name="empty_shape">empty shape</string>
+    <string name="filled_shape_no_border">filled shape no border</string>
+    <string name="filled_shape_with_border">filled shape with border</string>
+
+    <string name="gnss_nav_msg_status_loc_disabled">GNSS provider or Location is disabled, no updates until it\'s enabled</string>
+    <string name="gnss_nav_msg_status_not_supported">Device does not support tracking of GNSS Navigation Messages</string>
+    <string name="gnss_nav_msg_status_ready">GNSS Navigation Messages are successfully being tracked</string>
+
+    <string name="gnss_measurement_status_loc_disabled">GNSS provider or Location is disabled, no updates until it\'s enabled</string>
+    <string name="gnss_measurement_status_not_supported">Device does not support tracking of GNSS Measurements</string>
+    <string name="gnss_measurement_status_ready">GNSS Measurements are successfully being tracked</string>
+
+    <string name="gnss_status_unknown">Unknown status callback</string>
+
+    <!-- GNSS Map View -->
+
+    <!-- Accuracy View -->
+    <string name="ok">OK</string>
+
+    <!-- GNSS Logging -->
+
+    <string name="scan_button_title">Auto Configure With QR Code</string>
+    <string name="share_mqtt_qr_button_title">Share via QR Code</string>
+    <string name="channel">Channel</string>
+    <string name="ssid">SSID\n</string>
+
+    <string name="open_tower_map">Open Tower Map</string>
+    <string name="mqtt_connection_settings">MQTT Connection Settings</string>
+    <string name="qr_code">QR Code</string>
+    <string name="open_wifi_spectrum">Open Wi-Fi Spectrum View</string>
+
+    <!-- Uploader -->
+    <string name="uploader_notification_channel_name">Uploader</string>
+    <string name="uploader_notification_title">Uploading</string>
+    <string name="uploader_notification_progress_info">Uploaded <xliff:g id="progress_in_percent">%d</xliff:g>%%.</string>
+    <string name="uploader_starting">Starting upload&#8230;</string>
+    <string name="uploader_not_started">Not Started</string>
+    <string name="uploader_not_started_description">Did not start the upload</string>
+    <string name="uploader_disabled">Upload disabled</string>
+    <string name="uploader_disabled_description">Upload disabled for this project</string>
+    <string name="uploader_aborted">Upload aborted</string>
+    <string name="uploader_aborted_description">Nothing has been uploaded</string>
+    <string name="uploader_success">Upload successful</string>
+    <string name="uploader_success_description">Upload successful. Thanks for your contribution!</string>
+    <string name="uploader_partially_succeeded">Partially uploaded</string>
+    <string name="uploader_partially_succeeded_description">Partially uploaded mean that some data has been successfully sent before upload has been aborted. This may be caused by your request or by an error which has been encountered.</string>
+    <string name="uploader_failure">Upload failed</string>
+    <string name="uploader_failure_description">Upload failed due to unknown reason. Please check if you have the latest version of the app. If you encounter this problem for a long time, please let me know.</string>
+    <string name="uploader_invalid_api_key">Invalid access token</string>
+    <string name="uploader_invalid_api_key_description">User with the access token entered in app preferences cannot be found. Please check if entered access token is correct.</string>
+    <string name="uploader_invalid_input_data">Invalid data</string>
+    <string name="uploader_invalid_input_data_description">Server refused the data send by the app. Please check if you have the latest version of the app. If you encounter this problem for a long time, please let me know.</string>
+    <string name="uploader_no_data">Nothing to upload</string>
+    <string name="uploader_no_data_description">There is no data to upload. Please collect some measurements before uploading.</string>
+    <string name="uploader_delete_failed">Error while deleting measurements</string>
+    <string name="uploader_delete_failed_description">Application encountered an error while deleting measurements from your device. Please restart your device and check again. If you still encounter this problem, please let me know.</string>
+    <string name="uploader_connection_error">Connection error</string>
+    <string name="uploader_connection_error_description">The server could not be reached due to network related error which may be caused by missing, too slow or unstable Internet connection. Please check if you have latest application version and try again. If you encounter this problem for a long time, please let me know.</string>
+    <string name="uploader_server_error">Server error</string>
+    <string name="uploader_server_error_description">The server returned internal error which may mean that it is overloaded, temporarily unavailable or down for maintenance. Please try again later. If you encounter this problem for a long time, please let me know.</string>
+    <string name="uploader_limit_exceeded">Usage limit exceeded</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="permission_uploader_denied_message">Upload cancelled due to denied internet permission.</string>
+    <string name="unknown_error">Unknown error occurred!</string>
+    <string name="uploader_limit_exceeded_description">The daily usage limit for the app has been exceeded. Please try again tomorrow.</string>
+    <string name="uploader_no_internet_title">Internet unavailable</string>
+    <string name="uploader_no_internet_message">Cannot upload due to no Internet connection.</string>
+    <string name="cancel">Cancel</string>
+    <string name="preferences">Preferences</string>
+    <string name="show_upload_dialog_pref_title">Show Upload Config Dialog</string>
+    <string name="uploader_enqueued">An error occurred, will retry later</string>
+    <string name="upload_disabled_via_mdm">External upload has been disabled via MDM</string>
+    <string name="upload_saving_toggle_failed">An error occurred when trying to start saving records for upload</string>
+    <string name="upload_saving_start_toast">Started scanning and saving records for upload</string>
+    <string name="upload_saving_stop_toast">Stopped scanning and saving records for upload</string>
+
+    <string name="delete_upload_data_confirm_title">Confirm Deletion</string>
+    <string name="delete_upload_data_confirm_message">
+    This action will permanently delete all survey records stored for upload.
+    \n\nAre you sure you want to proceed?
+</string>
+    <string name="delete_upload_data_success">All upload data has been deleted</string>
+    <string name="delete_upload_data_failed">Failed to delete upload data</string>
+    <string name="show_upload_dialog_summary_off">Upload dialog will be skipped and the settings below will be used</string>
+    <string name="show_upload_dialog_summary_on">The config dialog will be shown before each upload</string>
+</resources>
