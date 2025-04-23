@@ -69,6 +69,8 @@ import java.util.stream.Collectors;
 import app.futured.donut.DonutProgressView;
 import app.futured.donut.DonutSection;
 import timber.log.Timber;
+import com.github.anastr.speedviewlib.SpeedView;
+import com.github.anastr.speedviewlib.components.Section;
 
 /**
  * A fragment for displaying the latest cellular network details to the user.
@@ -96,6 +98,9 @@ public class NetworkDetailsFragment extends AServiceDataFragment implements ICel
     private CellularChartViewModel chartViewModel;
     private SharedViewModel sharedViewModel;
 
+    private SpeedView speedometerRsrp;
+    private TextView signalQualityText;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -117,11 +122,16 @@ public class NetworkDetailsFragment extends AServiceDataFragment implements ICel
         chartViewModel = new ViewModelProvider(requireActivity()).get(getClass().getName() + "cellular_chart" + subscriptionId, CellularChartViewModel.class);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
+        speedometerRsrp = binding.speedometerRsrp;
+        signalQualityText = binding.signalQualityText;
+
         initializeLocationTextView();
 
         initializeUiListeners();
 
         initializeObservers();
+
+        initializeSpeedometer();
 
         chartViewModel.addInitialRssi(UNKNOWN_RSSI);
         ComposeFunctions.
@@ -737,7 +747,10 @@ public class NetworkDetailsFragment extends AServiceDataFragment implements ICel
     {
         // Adding the signal value first so that any cell change markers will be drawn on top of the
         // new signal value.
-        if (data.hasRsrp()) chartViewModel.addNewRssi((int) data.getRsrp().getValue());
+        if (data.hasRsrp()) {
+            chartViewModel.addNewRssi((int) data.getRsrp().getValue());
+            updateRsrpSpeedometer((int) data.getRsrp().getValue());
+        }
 
         viewModel.setCarrier(data.getProvider());
         viewModel.setMcc(data.hasMcc() ? String.valueOf(data.getMcc().getValue()) : "");
@@ -970,6 +983,7 @@ public class NetworkDetailsFragment extends AServiceDataFragment implements ICel
         binding.signalOneGroup.setVisibility(signalValue == null ? View.GONE : View.VISIBLE);
         binding.signalOneValue.setText(signalValue != null ? getString(R.string.dbm_value_label, String.valueOf(signalValue)) : "");
         setSignalStrengthBar(binding.progressBarSignalOne, signalValue, protocol.getMinSignalOne(), protocol.getMaxNormalizedSignalOne());
+        updateRsrpSpeedometer(signalValue);
     }
 
     /**
@@ -1373,4 +1387,61 @@ public class NetworkDetailsFragment extends AServiceDataFragment implements ICel
         });
         alertBuilder.create().show();
     }
+
+private void initializeSpeedometer() {
+    // Set speedometer range based on RSRP values (typically -140 to -44 dBm for LTE)
+    speedometerRsrp.setMinSpeed(-140);
+    speedometerRsrp.setMaxSpeed(-44);
+    
+    // Initial position
+    speedometerRsrp.speedTo(-120, 0);
+    
+    // Customize appearance
+    speedometerRsrp.setUnit("dBm");
+    speedometerRsrp.setWithTremble(false);
+    
+    // Set sections for different signal quality ranges
+    speedometerRsrp.clearSections();
+    speedometerRsrp.addSections(
+        new Section(0f, .25f, Color.RED),     // Poor: -140 to -119 dBm
+        new Section(.25f, .5f, Color.YELLOW), // Fair: -119 to -100 dBm
+        new Section(.5f, .75f, Color.GREEN),  // Good: -100 to -80 dBm
+        new Section(.75f, 1f, Color.BLUE)     // Excellent: -80 to -44 dBm
+    );
+}
+
+private void updateRsrpSpeedometer(Integer rsrpValue) {
+    if (rsrpValue == null) {
+        speedometerRsrp.speedTo(speedometerRsrp.getMinSpeed(), 300);
+        signalQualityText.setText("");
+        signalQualityText.setVisibility(View.GONE);
+        return;
+    }
+
+    signalQualityText.setVisibility(View.VISIBLE);
+    speedometerRsrp.speedTo(rsrpValue, 300);
+    updateSignalQualityText(rsrpValue);
+}
+
+private void updateSignalQualityText(int rsrpValue) {
+    String qualityText;
+    int backgroundColor;
+    
+    if (rsrpValue <= -120) {
+        qualityText = "Poor Coverage";
+        backgroundColor = Color.RED;
+    } else if (rsrpValue <= -100) {
+        qualityText = "Fair Coverage"; 
+        backgroundColor = Color.YELLOW;
+    } else if (rsrpValue <= -80) {
+        qualityText = "Good Coverage";
+        backgroundColor = Color.GREEN;
+    } else {
+        qualityText = "Excellent Coverage";
+        backgroundColor = Color.BLUE;
+    }
+    
+    signalQualityText.setText(qualityText);
+    signalQualityText.setBackgroundColor(backgroundColor);
+}
 }

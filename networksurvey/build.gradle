@@ -95,6 +95,12 @@ android {
     }
 }
 
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
 configurations.configureEach {
     exclude group: 'com.google.android.gms', module: 'play-services-ads'
     exclude group: 'com.google.android.gms', module: 'play-services-ads-identifier'
@@ -186,6 +192,8 @@ dependencies {
     regularImplementation platform('com.google.firebase:firebase-bom:33.5.1')
     regularImplementation 'com.google.firebase:firebase-analytics'
     regularImplementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation 'com.github.anastr:speedviewlib:1.6.0'
 
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.annotation:annotation:1.9.1'

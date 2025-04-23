@@ -240,6 +240,39 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_marginBottom="@dimen/medium_margin">
+
+                    <!-- Speedometer for RSRP -->
+                    <com.github.anastr.speedviewlib.SpeedView
+                        android:id="@+id/speedometer_rsrp"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        app:sv_speedometerWidth="20dp"
+                        app:sv_backgroundCircleColor="#333333"
+                        app:sv_unitTextSize="12sp"
+                        app:sv_textColor="#FFFFFF" />
+                        
+                    <!-- Text view for signal quality -->
+                    <TextView
+                        android:id="@+id/signal_quality_text"
+                        style="@style/StandardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Good Coverage"
+                        android:background="@drawable/rounded_background"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/xx_small_margin"
                     android:orientation="horizontal"
                     android:baselineAligned="false">
