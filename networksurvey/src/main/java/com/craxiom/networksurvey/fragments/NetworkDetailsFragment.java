@@ -1427,18 +1427,18 @@ private void updateSignalQualityText(int rsrpValue) {
     String qualityText;
     int backgroundColor;
     
-    if (rsrpValue <= -120) {
-        qualityText = "Poor Coverage";
+    if (rsrpValue <= -100) {
+        qualityText = "Poor";
         backgroundColor = Color.RED;
-    } else if (rsrpValue <= -100) {
-        qualityText = "Fair Coverage"; 
-        backgroundColor = Color.YELLOW;
-    } else if (rsrpValue <= -80) {
-        qualityText = "Good Coverage";
+    } else if (rsrpValue > -100 && rsrpValue <= -90) {
+        qualityText = "Fair to poor";
+        backgroundColor = Color.parseColor("#FFA500"); // Orange
+    } else if (rsrpValue > -90 && rsrpValue <= -80) {
+        qualityText = "Good";
+        backgroundColor = Color.parseColor("#FFCC00"); // Yellow
+    } else { // >= -80
+        qualityText = "Excellent";
         backgroundColor = Color.GREEN;
-    } else {
-        qualityText = "Excellent Coverage";
-        backgroundColor = Color.BLUE;
     }
     
     signalQualityText.setText(qualityText);
